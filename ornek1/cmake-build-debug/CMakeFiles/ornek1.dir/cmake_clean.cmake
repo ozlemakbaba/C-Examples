@@ -1,9 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/ornek1.dir/main.c.obj"
+  "CMakeFiles/ornek1.dir/main.c.o"
   "ornek1.pdb"
-  "ornek1.exe"
-  "ornek1.exe.manifest"
-  "libornek1.dll.a"
+  "ornek1"
 )
 
 # Per-language clean rules from dependency scanning.

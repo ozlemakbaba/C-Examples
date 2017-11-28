@@ -1,6 +1,6 @@
 #include <stdio.h>
 
 int main() {
-    printf("özlem akbaba\n");
+    printf("Bilim ve Teknoloji Topluluğu\n");
     return 0;
 }
