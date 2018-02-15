@@ -1,6 +1,5 @@
 #include <stdio.h>
-
-int main() {
+aaa) {
     printf("Bilim ve Teknoloji Topluluğu\n");
     return 0;
-}
+}aa
