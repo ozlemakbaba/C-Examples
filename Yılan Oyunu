@@ -1,0 +1,125 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <windows.h>
+#include <conio.h>
+
+int width = 50, height = 20;
+int yilanX, yilanY, fareX, fareY;
+int oyunaBasla, toplamPuan;
+int kuyrukX[100], kuyrukY[100];
+int kuyrukN=0;
+
+enum YON {SOL=1, SAG, ASAGI, YUKARI,DUR} yonler;
+
+
+int main(){
+	srand(clock());
+	basla();
+	
+	while(oyunaBasla){
+		grafik();
+		kontrol();
+		hareket();
+		Sleep(50);
+	}
+}
+
+
+void basla(){
+	oyunaBasla=1;
+	toplamPuan=0;
+	yilanX = width/2;
+	yilanY = height/2;
+	fareX = 1+rand()%(width-1);
+	fareY = 1+rand()%(height-1);
+}
+
+void grafik(){
+	system("cls");
+	int i=0, j=0,k;
+	printf("\t.........YILAN OYUNUNA HOS GELDINIZ.......\n");
+	printf("\n");
+	for(i=0;i<height;i++){
+		printf("\t");
+		for(j=0;j<width;j++)
+		{
+			if(i==0 || i==height-1 || j==0 || j==width-1) printf("#");
+			else if(i==yilanY && j==yilanX) printf("@");
+			else if(i==fareY && j==fareX) printf("X");
+			else {
+				int boslukBas=0;
+				for(k=0;k<kuyrukN;k++)
+				{
+					if(kuyrukX[k]==j && kuyrukY[k]==i){
+						printf("0");
+						boslukBas=1;
+					}
+				}
+				if(!boslukBas) printf(" ");
+			}		 
+		}
+		printf("\n");
+	}
+	printf("\n\t Toplam Puaniniz = %d\n",toplamPuan);
+}
+void kontrol(){
+	if(kbhit()){
+		switch(getch()){
+			case 75: 
+					yonler = SOL;
+					break;
+			case 77:
+					yonler = SAG;
+					break;
+			case 72:
+					yonler = YUKARI;
+					break;
+			case 80:
+					yonler = ASAGI;
+					break;
+		}
+	}
+}
+void hareket(){
+	
+	int i;
+	for(i=kuyrukN-1;i>0;i--){
+		kuyrukX[i]=kuyrukX[i-1];
+		kuyrukY[i]=kuyrukY[i-1];
+	}
+	kuyrukX[0]=yilanX;
+	kuyrukY[0]=yilanY;
+	
+	switch(yonler){
+		case SOL:
+				yilanX--;
+				break;
+		case SAG:
+				yilanX++;
+				break;
+		case ASAGI:
+				yilanY++;
+				break;
+		case YUKARI:
+				yilanY--;
+				break;		
+	}
+	
+//	if(yilanX == 0 || yilanX==width || yilanY==0 || yilanY==height) oyunaBasla=0;
+	if(yilanX==0) 			yilanX = width-1;
+	if(yilanX==width) 		yilanX=1;
+	if(yilanY==0) 			yilanY=height-1;
+	if(yilanY==height) 		yilanY=1;
+	
+	if(yilanX==fareX && yilanY==fareY){
+		toplamPuan+=10;
+		fareX = 2+rand()%(width-4);
+		fareY = 2+rand()%(height-4);
+		kuyrukN++;
+	}
+	for(i=0;i<kuyrukN;i++){
+		if(yilanX==kuyrukX[i] && yilanY == kuyrukY[i])
+			oyunaBasla=0;
+	}
+}
