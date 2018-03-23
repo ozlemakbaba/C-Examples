@@ -1,0 +1,59 @@
+#include<stdio.h>
+#include<math.h>
+#include<stdlib.h>
+#include<conio.h>
+
+void geometrik(int carpim,int adet)
+{
+	float sonuc2;
+	sonuc2=pow(carpim,(1/adet));
+	printf("Girdiginiz %d adet sayinin geometrik ortalamasi =%.2f dir\n",adet,*geometrik);
+	//printf("fonksiyon icindesin\n"); deneme
+}
+void aritmetik(int toplam ,int adet)
+{
+	float sonuc1;
+	sonuc1 = toplam/adet;
+	printf("Girdiginiz %d adet sayinin aritmetik ortalamasi =%.2f dir\n",adet,sonuc1);	
+	//printf("fonksiyon icindesin\n"); deneme
+}
+
+void secim()
+{
+	int cevap;
+	
+	printf("Secim yapiniz:\n");
+	printf("1-Aritmetik ortalama   2-Geometrik ortalama\n");
+	scanf("%s",&cevap);
+	
+	switch(cevap)
+	{
+		case '1': 
+			aritmetik(int *toplam, int *adet);
+			break;
+		case '2':
+			geometrik();
+			break;
+	}
+}
+int main(void)
+{
+	
+	int adet,i,sayi,toplam=0,carpim=1;
+	
+	printf("aritmetik ve geometrik ortalama hesaplama programi\n\n");
+	printf("kac adet sayi giriceksiniz:");
+	scanf("%d",&adet);
+	
+	for(i=0;i<adet;i++)
+	{
+		printf("%d. Sayiyi giriniz:",(i+1));
+		scanf("%d",&sayi);
+		toplam+=sayi;
+	    carpim*=sayi;
+	}
+	/*printf("toplam %d\n",toplam);          kontrol
+	printf("carpim %d\n",carpim);*/
+	secim();
+}
+
